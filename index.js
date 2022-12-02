@@ -78,7 +78,7 @@ const animate = () => {
   bgLv1.draw();
 
   collisionBlocks.forEach((collisionBlock) => {
-    collisionBlock.debug(); //* Draws Collision Blocks
+    ////collisionBlock.debug(); //* Draws Collision Blocks
   });
 
   doors.forEach((door) => {
@@ -100,7 +100,7 @@ const animate = () => {
 }
 
   player.draw();
-  player.debug(); //* Draws Hitbox And Margin
+  ////player.debug(); //* Draws Hitbox And Margin
   player.update();
 };
 
