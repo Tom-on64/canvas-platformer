@@ -108,11 +108,11 @@ class Player extends Sprite {
     this.hitboxUpdate();
 
     ctx.fillStyle = "#0000FF44";
-    /* ctx.fillRect(  Debug Function
+    ctx.fillRect(
       this.hitbox.position.x,
       this.hitbox.position.y,
       this.hitbox.width,
-      this.hitbox.height */
+      this.hitbox.height
     );
 
     this.verticalCollisionCheck();
