@@ -1,5 +1,5 @@
 class Player extends Sprite {
-  constructor({ collisionBlocks = [], src, frameRate, animations }) {
+  constructor({ collisionBlocks = [], src, frameRate, animations, loop }) {
     super({
       position: {
         x: 200,
@@ -107,15 +107,32 @@ class Player extends Sprite {
 
     this.hitboxUpdate();
 
-    ctx.fillStyle = "#0000FF44";
+    /* ctx.fillStyle = "#0000FF44"; //* [DEBUG]
     ctx.fillRect(
       this.hitbox.position.x,
       this.hitbox.position.y,
       this.hitbox.width,
       this.hitbox.height
-    );
+    ); */
 
     this.verticalCollisionCheck();
+  }
+
+  handleInput(keys) {
+    if (this.preventInput) return;
+    this.velocity.x = 0;
+    if (keys.d.pressed) {
+      this.switchSprite("runRight");
+      this.velocity.x = 4;
+      this.lastDirection = "right";
+    } else if (keys.a.pressed) {
+      this.switchSprite("runLeft");
+      this.velocity.x = -4;
+      this.lastDirection = "left";
+    } else {
+      if (this.lastDirection === "left") this.switchSprite("idleLeft");
+      else this.switchSprite("idleRight");
+    }
   }
 
   switchSprite(sprite) {
@@ -124,6 +141,8 @@ class Player extends Sprite {
     this.image = this.animations[sprite].image;
     this.frameRate = this.animations[sprite].frameRate;
     this.frameBuffer = this.animations[sprite].frameBuffer;
+    this.loop = this.animations[sprite].loop;
+    this.currentAnimation = this.animations[sprite];
   }
 
   hitboxUpdate() {
